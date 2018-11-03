@@ -53,5 +53,6 @@ Including a python script that runs few testcases for unit testing functions. To
 1. Currently, when short url is accessed, I add an event with the current timestamp to this url.
 Also need to include events when long url is accessed.
 2. Add more testcases specially with respect to connection failures
+3. Hash calculation to include alphabets more frequently, default python implementation seems to be using digits more often.
 
 
