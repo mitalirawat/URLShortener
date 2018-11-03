@@ -24,24 +24,23 @@ some examples of curl requests that can be sent to the server.
 
 Add a long url: Returns short url for the given long url
 
-`curl -H "Content-type: application/json" -X POST http://localhost:5002/urls -d
-'{"urls": [{"longurl":"lonnnngggurlllllll"}]}'`
+`curl -H "Content-type: application/json" -X POST http://35.237.34.177:5002/urls -d '{"urls": [{"longurl":"aaaaaaaaaaaaaaaaaa222"}]}'`
   
 Get all urls information from DB:
 
-`curl -X GET http://23.96.111.47:5002/urls`
+`curl -X GET http://35.237.34.177:5002/urls`
 
 Get number of times a short url has been accessed: Replace short_url_id value with the short url returned from the POST call.
 
-`curl -H "Content-type: application/json" -X GET http://localhost:5002/urls/alltime_access/short_url_id`
+`curl -H "Content-type: application/json" -X GET http://35.237.34.177:5002/urls/alltime_access/529229d1978f23`
 
 Get number of times a short url has been accessed in the past 24 hours.
 
-`curl -H "Content-type: application/json" -X GET http://localhost:5002/urls/day_access/short_url_id`
+`curl -H "Content-type: application/json" -X GET http://35.237.34.177:5002/urls/day_access/529229d1978f23`
 
 Get number of times a short url has been accessed in the last 7 days.
 
-`curl -H "Content-type: application/json" -X GET http://localhost:5002/urls/week_access/short_url_id`
+`curl -H "Content-type: application/json" -X GET http://35.237.34.177:5002/urls/week_access/529229d1978f23`
 
 *Test Script*
 
