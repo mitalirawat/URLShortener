@@ -27,13 +27,19 @@ class MockupDBFlaskTest(unittest.TestCase):
     	# date = dateutil.parser.parse(dateStr)
     	request = self.server.receives(
         OpMsg('find', 'urls', filter={'shorturl': url}))
-    	
+
     	request.ok(cursor={'id': 0, 'firstBatch': [mapping_dict[url]]})
 
     def mock_db_update(self):
-		
+
 		request = self.server.pop().reply({"modified_count":1})
-	
+
+    def mock_db_get_many(self, url=None):
+        request = self.server.pop()
+        # request = self.server.receives(
+        # OpMsg({"count": "urls", "query": {"shorturl": url}}))
+        request.ok(cursor={'id': 0, 'firstBatch': [mapping_dict[url]], 'count':1})
+
     def test_get_url_not_empty(self):
     	future = go(self.app.get, "/urls/e5a53874fbde55")
     	self.mock_db_get(url="e5a53874fbde55")
@@ -55,14 +61,17 @@ class MockupDBFlaskTest(unittest.TestCase):
     	self.assertEqual("No long url found for this short url fggg874fbde55\n",
                      http_response.get_data())
 
-    def test_get_url_db_connection_failure(self):
-    	pass
+    def test_get_access_time_all(self):
 
-   	def test_post_long_url(self):
+        future = go(self.app.get, "/urls/alltime_access/e5a53874fbde55")
+    	self.mock_db_get_many(url="e5a53874fbde55")
 
-   		pass
+    	http_response = future()
+    	self.assertEqual("Access times for url: 'e5a53874fbde55'; for time duration: ' all' is: 1\n",
+                     http_response.get_data())
+
 
 if __name__ == '__main__':
 	unittest.main()
 
-   
+

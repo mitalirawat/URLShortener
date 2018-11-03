@@ -130,14 +130,15 @@ def create_app(mongo_uri):
             
 
     def get_access_times(url_id, time="all"):
+        
         cursor = urlcoll.find({"shorturl":url_id})
 
         #there was no hasNext() in cursor.Cursor for pymongo
-        if cursor.count() != 0:
+        try:
             url = cursor.next()
-        else: 
-            respdata="No long url found for this short url" + url_id
-            return create_error_response(respdata)
+        except: 
+            respdata="No long url found for this short url " + url_id
+            return settings.create_error_response(respdata)
 
         longurl = ""
         url["id"] = str(url["_id"])

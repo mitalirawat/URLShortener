@@ -10,5 +10,5 @@ import flask
     
 
 def create_error_response(errmsg="Unexpected error in operation"):
-    resp = flask.Response("ErrorResponse:"+errmsg, status=400, mimetype='application/json')
+    resp = flask.Response("ErrorResponse:"+errmsg+"\n", status=400, mimetype='application/json')
     return resp
